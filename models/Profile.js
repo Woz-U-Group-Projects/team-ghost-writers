@@ -120,7 +120,7 @@ social: {
 },
 date: {
   type: Date,
-  default: Data.now
+  default: Date.now
 }
 });
 
