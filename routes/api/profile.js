@@ -9,7 +9,7 @@ const router = express.Router();
 
 //whatever request I want: post/get etc 
 //the beginning of the route is already in server.js 
-router.get('/test', (req, res) => res.json({msg: "Profile Works"}));
+router.get('/test', (req, res) => res.json({msg: 'Profile Works'}));
 
 //must export to work
 module.exports = router;

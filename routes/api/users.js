@@ -2,16 +2,14 @@
 const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 
 //Load Input Validation
 const validateRegisterInput = require('../../validation/register');
-
-
-//Encrypt Password
-const bcrypt = require('bcryptjs');
+const validateLoginInput = require('../../validation/login');
 
 //Load User model
 const User = require('../../models/User');
@@ -22,7 +20,7 @@ const User = require('../../models/User');
 
 //whatever request I want: post/get etc 
 //the beginning of the route is already in server.js 
-router.get('/test', (req, res) => res.json({msg: "Users Works"}));
+router.get('/test', (req, res) => res.json({msg: 'Users Works'}));
 
 //@route  GET api/users/register
 //@desc   register user
@@ -37,7 +35,7 @@ router.post('/register', (req, res) => {
 
   User.findOne({ email: req.body.email })
     .then(user => {
-    if(user) {
+      if(user) {
       errors.email = 'Email already exists';
       return res.status(400).json(errors);
     } else {
@@ -63,17 +61,24 @@ router.post('/register', (req, res) => {
             .save()
             .then(user => res.json(user))
             .catch(err => console.log(err));
-        })
-      })
+        });
+      });
 
     }
-  })
+  });
 });
 
 //@route  GET api/users/login
 //@desc   login user / Returning JWT token
 //@access Public
 router.post('/login', (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  //Check Validation
+  if(!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -82,7 +87,8 @@ router.post('/login', (req, res) => {
   .then(user => {
     //Check for user
     if(!user) {
-      return res.status(404).json({email: 'User not found'});
+      errors.email = 'User not found';
+      return res.status(404).json(errors);
     }
 
     //check password
@@ -90,26 +96,25 @@ router.post('/login', (req, res) => {
     .then(isMatch => {
       if(isMatch) {
         // User Matched
-
-
-        //Create JWT Payload
-        const payload = { id: user.id, name: user.name, avatar: user.avatar } 
+        const payload = { id: user.id, name: user.name, avatar: user.avatar }; 
         //Create JWT Payload
 
         //Sign Token
         //key is in config/keys.js // 
-        jwt.sign(payload, 
+        jwt.sign(
+          payload, 
           keys.secretOrKey, 
           {expiresIn: 3600}, 
           (err, token) => {
             res.json({
               success: true,
               token: 'Bearer ' + token
-            })
-
-        });
+            });
+          }
+        );
       } else {
-        return res.status(400).json({password: 'Password incorrect'});
+        errors.password = 'Password incorrect';
+        return res.status(400).json(errors);
       }
     });
   });
@@ -118,13 +123,15 @@ router.post('/login', (req, res) => {
 //@route  GET api/users/current
 //@desc   Return current user
 //@access Private
-router.get('/current', passport.authenticate('jwt', {session: false }), (req, res) => {
+router.get(
+  '/current', 
+  passport.authenticate('jwt', {session: false }), (req, res) => {
   res.json({
     id: req.user.id,
     name: req.user.name,
     email: req.user.email
-  });
-}
+    });
+  }
 );
 
 
