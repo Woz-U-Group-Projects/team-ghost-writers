@@ -18,9 +18,6 @@ const ProfileSchema = new Schema({
     type: String
     //required: true
   },
-  yearswithcompany: {
-    type: String
-  },
   website: {
     type: String
   },
@@ -90,15 +87,15 @@ education: [
     required: true
   },
   to: {
-    type: Date,
+    type: Date
   },
   current: {
     type: Boolean,
     default: false
   },
   description: {
-    type: String,
-  },
+    type: String
+  }
 }
 ],
 social: {
