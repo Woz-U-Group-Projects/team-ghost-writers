@@ -228,7 +228,7 @@ router.post('/education', passport.authenticate('jwt', {session: false}), (req, 
   .then(profile => {
     const newEdu = {
       school: req.body.school,
-      degree: req.body.company,
+      degree: req.body.degree,
       fieldofstudy: req.body.fieldofstudy,
       from: req.body.from,
       to: req.body.to,
@@ -296,11 +296,14 @@ router.delete('/education/:edu_id', passport.authenticate('jwt', {session: false
 //@desc   Delete user and profile
 //@access Private
 router.delete('/', passport.authenticate('jwt', {session: false}), (req, res) => {
+  //this deletes the profile
   Profile.findOneAndRemove({user: req.user.id})
     .then(() => {
+      //this below deletes user as well
       User.findOneAndRemove({_id: req.user.id})
-      .then(() => res.json({ success: true}))
-    })
+      .then(() => res.json({ success: true})
+      );
+    });
   }
 );
 
