@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
-//Create Schema
+// Create Schema
 const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -13,10 +12,10 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
-  //for our business network company this might need to be required. 
+   //for our business network company this might need to be required. 
   company: {
     type: String
-    //required: true
+     //required: true
   },
   website: {
     type: String
@@ -41,84 +40,84 @@ const ProfileSchema = new Schema({
   },
   experience: [
     {
-    title: {
-      type: String,
-      required: true
+      title: {
+        type: String,
+        required: true
+      },
+      company: {
+        type: String,
+        required: true
+      },
+      location: {
+        type: String
+      },
+      from: {
+        type: Date,
+        required: true
+      },
+      to: {
+        type: Date
+      },
+      current: {
+        type: Boolean,
+        default: false
+      },
+      description: {
+        type: String
+      }
+    }
+  ],
+  education: [
+    {
+      school: {
+        type: String,
+        required: true
+      },
+      degree: {
+        type: String,
+        required: true
+      },
+      fieldofstudy: {
+        type: String,
+        required: true
+      },
+      from: {
+        type: Date,
+        required: true
+      },
+      to: {
+        type: Date
+      },
+      current: {
+        type: Boolean,
+        default: false
+      },
+      description: {
+        type: String
+      }
+    }
+  ],
+  social: {
+    youtube: {
+      type: String
     },
-    company: {
-      type: String,
-      required: true
+    twitter: {
+      type: String
     },
-    location: {
-      type: String,
+    facebook: {
+      type: String
     },
-    from: {
-      type: Date,
-      required: true
+    linkedin: {
+      type: String
     },
-    to: {
-      type: Date,
-    },
-    current: {
-      type: Boolean,
-      default: false
-    },
-    description: {
+    instagram: {
       type: String
     }
-  }
-],
-education: [
-  {
-  school: {
-    type: String,
-    required: true
   },
-  degree: {
-    type: String,
-    required: true
-  },
-  fieldofstudy: {
-    type: String,
-    required: true
-  },
-  from: {
+  date: {
     type: Date,
-    required: true
-  },
-  to: {
-    type: Date
-  },
-  current: {
-    type: Boolean,
-    default: false
-  },
-  description: {
-    type: String
+    default: Date.now
   }
-}
-],
-social: {
-  youtube: {
-    type: String
-  },
-  twitter: {
-    type: String
-  },
-  facebook: {
-    type: String
-  },
-  linkedin: {
-    type: String
-  },
-  instagram: {
-    type: String
-  }
-},
-date: {
-  type: Date,
-  default: Date.now
-}
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

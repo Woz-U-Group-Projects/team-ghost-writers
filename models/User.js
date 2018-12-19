@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//Create Schema
+// Create Schema
 const UserSchema = new Schema({
   name: {
     type: String,
-    require: true
+    required: true
   },
   email: {
     type: String,
