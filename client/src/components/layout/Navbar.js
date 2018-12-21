@@ -1,6 +1,7 @@
 // rfc tab - create a component // display dumb components
 //rcc tab -- class based component
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom';
 
 class Navbar extends Component {
   render() {
@@ -8,29 +9,33 @@ class Navbar extends Component {
     //the return is for the JSX
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
-    <div className="container">
-      <a className="navbar-brand" href="landing.html">Engage</a>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+        <div className="container">
+      <Link className="navbar-brand" to="/">
+      Engage
+      </Link>
+        <button 
+        className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
         <span className="navbar-toggler-icon"></span>
       </button>
 
       <div className="collapse navbar-collapse" id="mobile-nav">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <a className="nav-link" href="profiles.html">Business Owners
-            </a>
+            <Link
+            className="nav-link" to="/profiles">Business Owners
+            </Link>
             <a className="nav-link"
-            href="profiles.html">Owners
+            href="profiles.html">Business Employees
             </a>
           </li>
         </ul>
 
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <a className="nav-link" href="register.html">Sign Up</a>
+            <Link className="nav-link" to="/register">Sign Up</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="login.html">Login</a>
+            <Link className="nav-link" to="/login">Login</Link>
           </li>
         </ul>
       </div>
