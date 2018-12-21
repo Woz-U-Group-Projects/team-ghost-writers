@@ -21,7 +21,7 @@ const User = require('../../models/User');
 //the beginning of the route is already in server.js 
 router.get('/test', (req, res) => res.json({ msg: 'Users Works' }));
 
-// @route   GET api/users/register
+// @route   POST api/users/register
 // @desc    Register user
 // @access  Public
 router.post('/register', (req, res) => {
