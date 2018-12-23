@@ -194,7 +194,6 @@ router.post(
 // @route        DELETE api/posts/comment/:id/:comment_id
 //@description   Remove comment from post
 //@access        Private
-
 router.delete(
   "/comment/:id/comment_id",
   passport.authenticate("jwt", { session: false }),
