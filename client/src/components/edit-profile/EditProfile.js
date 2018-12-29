@@ -49,7 +49,7 @@ class CreateProfile extends Component {
         const profile = nextProps.profile.profile;
 
         // Bring skills array back to common separated value(CSV), commas seperate them
-        const skillCSV = profile.skills.join(',');
+        const skillsCSV = profile.skills.join(',');
 
         // if profile field doesnt exist, make empty string
         profile.company = !isEmpty(profile.company) ? profile.company : '';
@@ -78,7 +78,7 @@ class CreateProfile extends Component {
         website: profile.website,
         location: profile.location,
         status: profile.status,
-        skills: profile.skills,
+        skills: skillsCSV,
         githubusername: profile.githubusername,
         bio: profile.bio,
         twitter: profile.twitter,
