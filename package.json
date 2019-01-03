@@ -1,41 +1,39 @@
 {
-  "name": "engage-app",
+  "name": "team-ghost-writers",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "engage application",
+  "main": "server.js",
   "scripts": {
-    "start": "webpack-dev-server --open"
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.0.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Woz-U-Group-Projects/team-ghost-writers.git"
   },
+  "author": "Seth Wickham",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Woz-U-Group-Projects/team-ghost-writers/issues"
+  },
+  "homepage": "https://github.com/Woz-U-Group-Projects/team-ghost-writers#readme",
   "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.1",
-    "redux": "^3.7.0",
-    "reselect": "^3.0.1"
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.10.0"
   },
-  "babel": {
-    "presets": [
-      [
-        "es2015",
-        {
-          "modules": false
-        }
-      ],
-      "stage-2",
-      "react"
-    ]
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }
