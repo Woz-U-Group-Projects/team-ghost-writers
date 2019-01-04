@@ -1,6 +1,3 @@
-//Fetch profile information
-//location bio testimony social media links 
-
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -8,9 +5,7 @@ const passport = require('passport');
 
 // Load Validation
 const validateProfileInput = require('../../validation/profile');
-//Load experience input validation
 const validateExperienceInput = require('../../validation/experience');
-//load education input validation
 const validateEducationInput = require('../../validation/education');
 
 // Load Profile Model
@@ -21,9 +16,6 @@ const User = require('../../models/User');
 // @route   GET api/profile/test
 // @desc    Tests profile route
 // @access  Public
-
-//whatever request I want: post/get etc 
-//the beginning of the route is already in server.js 
 router.get('/test', (req, res) => res.json({ msg: 'Profile Works' }));
 
 // @route   GET api/profile
@@ -67,9 +59,9 @@ router.get('/all', (req, res) => {
     .catch(err => res.status(404).json({ profile: 'There are no profiles' }));
 });
 
-//@route  GET api/profile/handle/:actualhandle(benjaminfaul)
-//@desc   Get profile by handle // anyone can view a profile
-//@access Public
+// @route   GET api/profile/handle/:handle
+// @desc    Get profile by handle
+// @access  Public
 
 router.get('/handle/:handle', (req, res) => {
   const errors = {};
@@ -87,9 +79,9 @@ router.get('/handle/:handle', (req, res) => {
     .catch(err => res.status(404).json(err));
 });
 
-//@route  GET api/profile/user/:user_id)
-//@desc   Get profile by user ID
-//@access Public // could be private based on my idea
+// @route   GET api/profile/user/:user_id
+// @desc    Get profile by user ID
+// @access  Public
 
 router.get('/user/:user_id', (req, res) => {
   const errors = {};
@@ -140,7 +132,7 @@ router.post(
       profileFields.skills = req.body.skills.split(',');
     }
 
-    // Social Media Addresses
+    // Social
     profileFields.social = {};
     if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
     if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
@@ -148,11 +140,9 @@ router.post(
     if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
     if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
 
-    //Search for user by their id (user: req.user.id)
-
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
-        // Update profile
+        // Update
         Profile.findOneAndUpdate(
           { user: req.user.id },
           { $set: profileFields },
@@ -168,8 +158,8 @@ router.post(
             res.status(400).json(errors);
           }
 
-        //If handle does not exist // Save Profile
-        new Profile(profileFields).save().then(profile => res.json(profile));
+          // Save Profile
+          new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
     });
@@ -202,7 +192,7 @@ router.post(
         description: req.body.description
       };
 
-    //Add to exp array - to top with unshift
+      // Add to exp array
       profile.experience.unshift(newExp);
 
       profile.save().then(profile => res.json(profile));
@@ -236,7 +226,7 @@ router.post(
         description: req.body.description
       };
 
-      // Add to exp array - to top with unshift
+      // Add to exp array
       profile.education.unshift(newEdu);
 
       profile.save().then(profile => res.json(profile));
@@ -258,7 +248,6 @@ router.delete(
           .map(item => item.id)
           .indexOf(req.params.exp_id);
 
-        //Once we have the array
         // Splice out of array
         profile.experience.splice(removeIndex, 1);
 
@@ -300,10 +289,7 @@ router.delete(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-
-      //this deletes the profile
     Profile.findOneAndRemove({ user: req.user.id }).then(() => {
-      //this below deletes user as well
       User.findOneAndRemove({ _id: req.user.id }).then(() =>
         res.json({ success: true })
       );

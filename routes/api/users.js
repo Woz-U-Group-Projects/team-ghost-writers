@@ -16,9 +16,6 @@ const User = require('../../models/User');
 // @route   GET api/users/test
 // @desc    Tests users route
 // @access  Public
-
-//whatever request I want: post/get etc 
-//the beginning of the route is already in server.js 
 router.get('/test', (req, res) => res.json({ msg: 'Users Works' }));
 
 // @route   POST api/users/register
@@ -50,7 +47,6 @@ router.post('/register', (req, res) => {
         password: req.body.password
       });
 
-      //encrypt password
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
@@ -94,7 +90,6 @@ router.post('/login', (req, res) => {
         const payload = { id: user.id, name: user.name, avatar: user.avatar }; // Create JWT Payload
 
         // Sign Token
-        //key is in config/keys.js 
         jwt.sign(
           payload,
           keys.secretOrKey,
@@ -129,5 +124,4 @@ router.get(
   }
 );
 
-//must export to work
 module.exports = router;

@@ -12,10 +12,8 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
-   //for our business network company this might need to be required. 
   company: {
     type: String
-     //required: true
   },
   website: {
     type: String
@@ -23,7 +21,6 @@ const ProfileSchema = new Schema({
   location: {
     type: String
   },
-  //Status will be differet types of position
   status: {
     type: String,
     required: true
