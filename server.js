@@ -42,7 +42,7 @@ if(process.env.NODE_ENV === 'production') {
   // for any route that hits it will load
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  })
+  });
 }
 
 //When deploying to Heroku
