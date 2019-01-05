@@ -1,5 +1,4 @@
 //also called ROOT REDUCER file
-
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import errorReducer from './errorReducer';
