@@ -4,6 +4,9 @@ const isEmpty = require('./is-empty');
 module.exports = function validateProfileInput(data) {
   let errors = {};
 
+  //first goes through this to make sure they were filled out, then to validator below for the information presented 
+
+  //this sets the value to a empty string so the validator will be able to work 
   data.handle = !isEmpty(data.handle) ? data.handle : '';
   data.status = !isEmpty(data.status) ? data.status : '';
   data.skills = !isEmpty(data.skills) ? data.skills : '';

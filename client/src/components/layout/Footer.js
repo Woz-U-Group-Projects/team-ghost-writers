@@ -7,3 +7,5 @@ export default () => {
     </footer>
   );
 };
+
+// the copyright gets the new year after ever year change

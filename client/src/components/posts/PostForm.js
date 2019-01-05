@@ -27,6 +27,8 @@ class PostForm extends Component {
 
     const { user } = this.props.auth;
 
+    //what we want to insert into our post
+
     const newPost = {
       text: this.state.text,
       name: user.name,

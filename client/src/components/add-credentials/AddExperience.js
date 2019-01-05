@@ -52,6 +52,7 @@ class AddExperience extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  //same as const errrors = this.state.errors - just destructuring 
   onCheck(e) {
     this.setState({
       disabled: !this.state.disabled,
@@ -59,6 +60,7 @@ class AddExperience extends Component {
     });
   }
 
+  //same as const errrors = this.state.errors - just destructuring 
   render() {
     const { errors } = this.state;
 

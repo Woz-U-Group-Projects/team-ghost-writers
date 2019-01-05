@@ -17,6 +17,7 @@ class PostItem extends Component {
   onUnlikeClick(id) {
     this.props.removeLike(id);
   }
+  //finding if a user has liked the post to turn the icon colors
 
   findUserLike(likes) {
     const { auth } = this.props;
