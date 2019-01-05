@@ -51,7 +51,7 @@ class AddEducation extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-//This blacks out the "To date" when current job is checked 
+
   onCheck(e) {
     this.setState({
       disabled: !this.state.disabled,
@@ -61,7 +61,7 @@ class AddEducation extends Component {
 
   render() {
     const { errors } = this.state;
-//same as const errrors = this.state.errors - just destructuring 
+
     return (
       <div className="add-education">
         <div className="container">

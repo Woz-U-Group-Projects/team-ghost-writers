@@ -1,4 +1,3 @@
-//also called ROOT REDUCER file
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import errorReducer from './errorReducer';
@@ -11,5 +10,3 @@ export default combineReducers({
   profile: profileReducer,
   post: postReducer
 });
-
-//if we want to add on we add here 
