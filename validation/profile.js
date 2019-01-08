@@ -3,16 +3,13 @@ const isEmpty = require('./is-empty');
 
 module.exports = function validateProfileInput(data) {
   let errors = {};
-
-  //first goes through this to make sure they were filled out, then to validator below for the information presented 
-
-  //this sets the value to a empty string so the validator will be able to work 
+//checks for empty string - translates it to empty string
   data.handle = !isEmpty(data.handle) ? data.handle : '';
   data.status = !isEmpty(data.status) ? data.status : '';
   data.skills = !isEmpty(data.skills) ? data.skills : '';
 
   if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
-    errors.handle = 'Handle needs to between 2 and 4 characters';
+    errors.handle = 'Handle needs to between 2 and 40 characters';
   }
 
   if (Validator.isEmpty(data.handle)) {
@@ -27,36 +24,42 @@ module.exports = function validateProfileInput(data) {
     errors.skills = 'Skills field is required';
   }
 
+//Can be empty -- if empty we want to check to make sure its valid
   if (!isEmpty(data.website)) {
     if (!Validator.isURL(data.website)) {
       errors.website = 'Not a valid URL';
     }
   }
 
+  //Can be empty -- if empty we want to check to make sure its valid
   if (!isEmpty(data.youtube)) {
     if (!Validator.isURL(data.youtube)) {
       errors.youtube = 'Not a valid URL';
     }
   }
 
+  //Can be empty -- if empty we want to check to make sure its valid
   if (!isEmpty(data.twitter)) {
     if (!Validator.isURL(data.twitter)) {
       errors.twitter = 'Not a valid URL';
     }
   }
 
+  //Can be empty -- if empty we want to check to make sure its valid
   if (!isEmpty(data.facebook)) {
     if (!Validator.isURL(data.facebook)) {
       errors.facebook = 'Not a valid URL';
     }
   }
 
+  //Can be empty -- if empty we want to check to make sure its valid
   if (!isEmpty(data.linkedin)) {
     if (!Validator.isURL(data.linkedin)) {
       errors.linkedin = 'Not a valid URL';
     }
   }
 
+  //Can be empty -- if empty we want to check to make sure its valid
   if (!isEmpty(data.instagram)) {
     if (!Validator.isURL(data.instagram)) {
       errors.instagram = 'Not a valid URL';

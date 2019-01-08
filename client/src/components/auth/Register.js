@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//prop types are the props in any of our components that we pushed into PropTypes 
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';

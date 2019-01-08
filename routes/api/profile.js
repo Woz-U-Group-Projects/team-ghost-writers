@@ -41,7 +41,7 @@ router.get(
 );
 
 // @route   GET api/profile/all
-// @desc    Get all profiles
+// @desc    Get all the profiles
 // @access  Public
 router.get('/all', (req, res) => {
   const errors = {};
@@ -127,7 +127,7 @@ router.post(
     if (req.body.status) profileFields.status = req.body.status;
     if (req.body.githubusername)
       profileFields.githubusername = req.body.githubusername;
-    // Skills - Spilt into array
+    // Skills - Spilt into an array
     if (typeof req.body.skills !== 'undefined') {
       profileFields.skills = req.body.skills.split(',');
     }
@@ -142,24 +142,26 @@ router.post(
 
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
-        // Update
+        // to Update if profile already exists
         Profile.findOneAndUpdate(
           { user: req.user.id },
           { $set: profileFields },
           { new: true }
         ).then(profile => res.json(profile));
       } else {
-        // Create
 
-        // Check if handle exists
-        Profile.findOne({ handle: profileFields.handle }).then(profile => {
+        // to Create
+        // Check if handle exists if so error will be seen 
+        Profile.findOne({ handle: profileFields.handle })
+          .then(profile => {
           if (profile) {
             errors.handle = 'That handle already exists';
             res.status(400).json(errors);
           }
 
-          // Save Profile
-          new Profile(profileFields).save().then(profile => res.json(profile));
+          // Save Profile - if they didnt have one before
+          new Profile(profileFields).save()
+            .then(profile => res.json(profile));
         });
       }
     });
@@ -193,6 +195,7 @@ router.post(
       };
 
       // Add to exp array
+      //unshift puts it at the beginning, not the end of the array
       profile.experience.unshift(newExp);
 
       profile.save().then(profile => res.json(profile));
@@ -226,7 +229,7 @@ router.post(
         description: req.body.description
       };
 
-      // Add to exp array
+      // Add to edu array
       profile.education.unshift(newEdu);
 
       profile.save().then(profile => res.json(profile));
@@ -248,10 +251,10 @@ router.delete(
           .map(item => item.id)
           .indexOf(req.params.exp_id);
 
-        // Splice out of array
+        // Splice out of array  - so it can be deleted 
         profile.experience.splice(removeIndex, 1);
 
-        // Save
+        // Save after it was deleted
         profile.save().then(profile => res.json(profile));
       })
       .catch(err => res.status(404).json(err));

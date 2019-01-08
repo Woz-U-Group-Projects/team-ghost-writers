@@ -15,7 +15,6 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
-    //When a user signs in - what buttons and links will he see
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
@@ -47,7 +46,6 @@ class Navbar extends Component {
       </ul>
     );
 
-    // what links a guest to the website will see 
     const guestLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
