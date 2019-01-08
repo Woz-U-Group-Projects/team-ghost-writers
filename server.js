@@ -35,7 +35,7 @@ app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 
 //if none of above hits. hit below for heroku
-// Server static assets if in production
+/* Server static assets if in production
 if(process.env.NODE_ENV === 'production') {
 //Set static folder
 app.use(express.static('client/build'));
@@ -43,7 +43,7 @@ app.use(express.static('client/build'));
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
-}
+}*/
 
 //When connecting to Heroku
 const port = process.env.PORT || 5000;
