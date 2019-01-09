@@ -3,11 +3,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 //Passport is Authentication
 const passport = require('passport');
+const path = require('path');
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
-const path = require('path');
-
 const app = express ();
 
 // Body Parser middleware
@@ -41,6 +40,7 @@ if(process.env.NODE_ENV === 'production') {
 //Set static folder
 app.use(express.static('client/build'));
 
+// the route
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
