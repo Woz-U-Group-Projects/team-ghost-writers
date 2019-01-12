@@ -10,5 +10,3 @@ export default combineReducers({
   profile: profileReducer,
   post: postReducer
 });
-
-//Also called rootReducer

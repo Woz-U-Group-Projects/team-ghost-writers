@@ -151,14 +151,14 @@ router.post(
       } else {
         // Create
 
-        // Check if handle exists if so error will be seen
+        // Check if handle exists
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = 'That handle already exists';
             res.status(400).json(errors);
           }
 
-          // Save Profile - if they didnt have one before
+          // Save Profile
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
@@ -193,7 +193,6 @@ router.post(
       };
 
       // Add to exp array
-      //unshift puts it at the beginning, not the end of the array
       profile.experience.unshift(newExp);
 
       profile.save().then(profile => res.json(profile));
@@ -227,7 +226,7 @@ router.post(
         description: req.body.description
       };
 
-      // Add to edu array
+      // Add to exp array
       profile.education.unshift(newEdu);
 
       profile.save().then(profile => res.json(profile));

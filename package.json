@@ -1,7 +1,7 @@
 {
   "name": "team-ghost-writers",
   "version": "1.0.0",
-  "description": "Social app for businesses",
+  "description": "social app for business",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/Woz-U-Group-Projects/team-ghost-writers.git"
   },
-  "author": "Ben Faul",
+  "author": "Ben",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Woz-U-Group-Projects/team-ghost-writers/issues"
