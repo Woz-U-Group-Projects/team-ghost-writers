@@ -1,5 +1,3 @@
-//Also called rootReducer
-
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import errorReducer from './errorReducer';
@@ -12,3 +10,5 @@ export default combineReducers({
   profile: profileReducer,
   post: postReducer
 });
+
+//Also called rootReducer

@@ -41,7 +41,7 @@ router.get(
 );
 
 // @route   GET api/profile/all
-// @desc    Get all the profiles
+// @desc    Get all profiles
 // @access  Public
 router.get('/all', (req, res) => {
   const errors = {};
@@ -127,7 +127,7 @@ router.post(
     if (req.body.status) profileFields.status = req.body.status;
     if (req.body.githubusername)
       profileFields.githubusername = req.body.githubusername;
-    // Skills - Spilt into an array
+    // Skills - Spilt into array
     if (typeof req.body.skills !== 'undefined') {
       profileFields.skills = req.body.skills.split(',');
     }
@@ -142,26 +142,24 @@ router.post(
 
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
-        // to Update if profile already exists
+        // Update
         Profile.findOneAndUpdate(
           { user: req.user.id },
           { $set: profileFields },
           { new: true }
         ).then(profile => res.json(profile));
       } else {
+        // Create
 
-        // to Create
-        // Check if handle exists if so error will be seen 
-        Profile.findOne({ handle: profileFields.handle })
-          .then(profile => {
+        // Check if handle exists if so error will be seen
+        Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = 'That handle already exists';
             res.status(400).json(errors);
           }
 
           // Save Profile - if they didnt have one before
-          new Profile(profileFields).save()
-            .then(profile => res.json(profile));
+          new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
     });
@@ -251,10 +249,10 @@ router.delete(
           .map(item => item.id)
           .indexOf(req.params.exp_id);
 
-        // Splice out of array  - so it can be deleted 
+        // Splice out of array
         profile.experience.splice(removeIndex, 1);
 
-        // Save after it was deleted
+        // Save
         profile.save().then(profile => res.json(profile));
       })
       .catch(err => res.status(404).json(err));
